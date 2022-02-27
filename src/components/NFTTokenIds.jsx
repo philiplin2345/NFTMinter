@@ -26,8 +26,9 @@ const styles = {
   },
 };
 
-function NFTTokenIds() {
-  const { NFTTokenIds } = useNFTTokenIds();
+function NFTTokenIds({ inputValue }) {
+  console.log("inpv", inputValue);
+  const { NFTTokenIds } = useNFTTokenIds(inputValue);
   const { Moralis, chainId } = useMoralis();
   const [visible, setVisibility] = useState(false);
   const [receiverToSend, setReceiver] = useState(null);

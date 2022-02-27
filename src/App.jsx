@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import {
   BrowserRouter as Router,
@@ -59,14 +59,17 @@ const styles = {
 const App = ({ isServerInfo }) => {
   const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } =
     useMoralis();
-
+  // eslint-disable-next-line no-unused-vars
+  const [collectionAddress, setCollectionAddress] = useState(
+    "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
+  );
   useEffect(() => {
     const connectorId = window.localStorage.getItem("connectorId");
     if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)
       enableWeb3({ provider: connectorId });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isWeb3Enabled]);
-
+  console.log(collectionAddress);
   return (
     <Layout style={{ height: "100vh", overflow: "auto" }}>
       <Router>
@@ -120,7 +123,7 @@ const App = ({ isServerInfo }) => {
               <NFTBalance />
             </Route>
             <Route path="/nftMarket">
-              <NFTTokenIds />
+              <NFTTokenIds inputValue={collectionAddress} />
             </Route>
             <Route path="/transactions">
               <NFTBalance />

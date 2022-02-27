@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useMoralisWeb3Api, useMoralisWeb3ApiCall } from "react-moralis";
 import { useIPFS } from "./useIPFS";
 
-export const useNFTTokenIds = () => {
+export const useNFTTokenIds = (collectionAddress) => {
   const { token } = useMoralisWeb3Api();
   const { isInitialized } = useMoralis();
   const { chainId } = useMoralis();
@@ -16,8 +16,9 @@ export const useNFTTokenIds = () => {
     isLoading,
   } = useMoralisWeb3ApiCall(token.getAllTokenIds, {
     chain: chainId,
-    address: "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D",
+    address: collectionAddress,
   });
+  console.log("coladdr", collectionAddress);
   console.log(getNFTTokenIds);
   console.log(data);
   useEffect(() => {

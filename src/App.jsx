@@ -23,6 +23,7 @@ import Contract from "components/Contract/Contract";
 import Text from "antd/lib/typography/Text";
 import Ramper from "components/Ramper";
 import MenuItems from "./components/MenuItems";
+import NFTTokenIds from "components/NFTTokenIds";
 const { Header, Footer } = Layout;
 
 const styles = {
@@ -116,6 +117,12 @@ const App = ({ isServerInfo }) => {
               <ERC20Transfers />
             </Route>
             <Route path="/nftBalance">
+              <NFTBalance />
+            </Route>
+            <Route path="/nftMarket">
+              <NFTTokenIds />
+            </Route>
+            <Route path="/transactions">
               <NFTBalance />
             </Route>
             <Route path="/contract">

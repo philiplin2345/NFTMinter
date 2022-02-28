@@ -76,7 +76,7 @@ const App = ({ isServerInfo }) => {
       <Router>
         <Header style={styles.header}>
           <Logo />
-          <SearchCollections />
+          <SearchCollections setInputValue={setCollectionAddress} />
           <MenuItems />
           <div style={styles.headerRight}>
             <Chains />

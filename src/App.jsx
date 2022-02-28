@@ -61,9 +61,7 @@ const App = ({ isServerInfo }) => {
   const { isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } =
     useMoralis();
   // eslint-disable-next-line no-unused-vars
-  const [collectionAddress, setCollectionAddress] = useState(
-    "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
-  );
+  const [collectionAddress, setCollectionAddress] = useState("explore");
   useEffect(() => {
     const connectorId = window.localStorage.getItem("connectorId");
     if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading)

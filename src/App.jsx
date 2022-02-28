@@ -24,6 +24,7 @@ import Text from "antd/lib/typography/Text";
 import Ramper from "components/Ramper";
 import MenuItems from "./components/MenuItems";
 import NFTTokenIds from "components/NFTTokenIds";
+import SearchCollections from "./components/SearchCollections";
 const { Header, Footer } = Layout;
 
 const styles = {
@@ -75,6 +76,7 @@ const App = ({ isServerInfo }) => {
       <Router>
         <Header style={styles.header}>
           <Logo />
+          <SearchCollections />
           <MenuItems />
           <div style={styles.headerRight}>
             <Chains />

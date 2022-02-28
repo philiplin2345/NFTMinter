@@ -4,6 +4,7 @@ import { Card, Image, Tooltip, Modal, Input, Skeleton } from "antd";
 import {
   FileSearchOutlined,
   SendOutlined,
+  RightCircleOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { getExplorer } from "helpers/networks";
@@ -27,7 +28,7 @@ const styles = {
   },
 };
 
-function NFTTokenIds({ inputValue }) {
+function NFTTokenIds({ inputValue, setInputValue }) {
   console.log("inpv", inputValue);
   const { NFTTokenIds } = useNFTTokenIds(inputValue);
   const { Moralis, chainId } = useMoralis();
@@ -136,8 +137,8 @@ function NFTTokenIds({ inputValue }) {
                   hoverable
                   actions={[
                     <Tooltip title="Show all NFTs of this collection">
-                      <ShoppingCartOutlined
-                        onClick={() => alert("OPENSEA INTEGRATION COMING!")}
+                      <RightCircleOutlined
+                        onClick={() => setInputValue(nft.addrs)}
                       />
                     </Tooltip>,
                   ]}

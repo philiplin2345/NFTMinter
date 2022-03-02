@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useMoralis } from "react-moralis";
 import { Card, Image, Tooltip, Modal, Input, Skeleton } from "antd";
@@ -39,7 +40,7 @@ function NFTTokenIds({ inputValue, setInputValue }) {
   const [isPending, setIsPending] = useState(false);
   const { verifyMetadata } = useVerifyMetadata();
   const NFTCollections = getCollectionsByChain(chainId);
-
+  const [NFTtoBuy, setNFTtoBuy] = useState();
   async function transfer(nft, amount, receiver) {
     console.log(nft, amount, receiver);
     const options = {
@@ -67,6 +68,11 @@ function NFTTokenIds({ inputValue, setInputValue }) {
 
   const handleTransferClick = (nft) => {
     setNftToSend(nft);
+    setVisibility(true);
+  };
+
+  const handleBuyClick = (nft) => {
+    setNFTtoBuy(nft);
     setVisibility(true);
   };
 
@@ -107,7 +113,7 @@ function NFTTokenIds({ inputValue, setInputValue }) {
                     </Tooltip>,
                     <Tooltip title="Sell On OpenSea">
                       <ShoppingCartOutlined
-                        onClick={() => alert("OPENSEA INTEGRATION COMING!")}
+                        onClick={() => handleBuyClick(nft)}
                       />
                     </Tooltip>,
                   ]}
@@ -161,20 +167,21 @@ function NFTTokenIds({ inputValue, setInputValue }) {
         </Skeleton>
       </div>
       <Modal
-        title={`Transfer ${nftToSend?.name || "NFT"}`}
+        title={`Transfer ${NFTtoBuy?.name || "NFT"}`}
         visible={visible}
         onCancel={() => setVisibility(false)}
-        onOk={() => transfer(nftToSend, amountToSend, receiverToSend)}
-        confirmLoading={isPending}
-        okText="Send"
+        onOk={() => alert("buying nft")}
+        okText="Buy"
       >
-        <AddressInput autoFocus placeholder="Receiver" onChange={setReceiver} />
-        {nftToSend && nftToSend.contract_type === "erc1155" && (
-          <Input
-            placeholder="amount to send"
-            onChange={(e) => handleChange(e)}
-          />
-        )}
+        <img
+          src={NFTtoBuy?.image}
+          style={{
+            width: "250px",
+            margin: "auto",
+            borderRadius: "10px",
+            marginBottom: "15px",
+          }}
+        />
       </Modal>
     </div>
   );

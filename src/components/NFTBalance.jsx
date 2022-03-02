@@ -35,6 +35,7 @@ function NFTBalance() {
   const [nftToSend, setNftToSend] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [nftToSell, setNftToSell] = useState(null);
+  const [sellPrice, setSellPrice] = useState(1);
   const { verifyMetadata } = useVerifyMetadata();
 
   async function transfer(nft, amount, receiver) {
@@ -132,7 +133,7 @@ function NFTBalance() {
         title={`Transfer ${nftToSell?.name || "NFT"}`}
         visible={visible}
         onCancel={() => setVisibility(false)}
-        onOk={() => alert("Selling nft")}
+        onOk={() => alert("selling nft")} //List(nftToSell, sellPrice)}
         okText="Sell"
       >
         <img
@@ -143,6 +144,11 @@ function NFTBalance() {
             borderRadius: "10px",
             marginBottom: "15px",
           }}
+        />
+        <input
+          autoFocus
+          placeholder="List price in MATIC"
+          onChange={(e) => setSellPrice(e.target.value)}
         />
       </Modal>
     </div>

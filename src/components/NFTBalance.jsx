@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useMoralis, useNFTBalances } from "react-moralis";
 import { Card, Image, Tooltip, Modal, Input, Skeleton } from "antd";
@@ -33,6 +34,7 @@ function NFTBalance() {
   const [amountToSend, setAmount] = useState(null);
   const [nftToSend, setNftToSend] = useState(null);
   const [isPending, setIsPending] = useState(false);
+  const [nftToSell, setNftToSell] = useState(null);
   const { verifyMetadata } = useVerifyMetadata();
 
   async function transfer(nft, amount, receiver) {
@@ -65,6 +67,10 @@ function NFTBalance() {
     setVisibility(true);
   };
 
+  const handleSellClick = (nft) => {
+    setNftToSell(nft);
+    setVisibility(true);
+  };
   const handleChange = (e) => {
     setAmount(e.target.value);
   };
@@ -100,7 +106,7 @@ function NFTBalance() {
                     </Tooltip>,
                     <Tooltip title="Sell On OpenSea">
                       <ShoppingCartOutlined
-                        onClick={() => alert("OPENSEA INTEGRATION COMING!")}
+                        onClick={() => handleSellClick(nft)}
                       />
                     </Tooltip>,
                   ]}
@@ -123,20 +129,21 @@ function NFTBalance() {
         </Skeleton>
       </div>
       <Modal
-        title={`Transfer ${nftToSend?.name || "NFT"}`}
+        title={`Transfer ${nftToSell?.name || "NFT"}`}
         visible={visible}
         onCancel={() => setVisibility(false)}
-        onOk={() => transfer(nftToSend, amountToSend, receiverToSend)}
-        confirmLoading={isPending}
-        okText="Send"
+        onOk={() => alert("Selling nft")}
+        okText="Sell"
       >
-        <AddressInput autoFocus placeholder="Receiver" onChange={setReceiver} />
-        {nftToSend && nftToSend.contract_type === "erc1155" && (
-          <Input
-            placeholder="amount to send"
-            onChange={(e) => handleChange(e)}
-          />
-        )}
+        <img
+          src={nftToSell?.image}
+          style={{
+            width: "250px",
+            margin: "auto",
+            borderRadius: "10px",
+            marginBottom: "15px",
+          }}
+        />
       </Modal>
     </div>
   );
